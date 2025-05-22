@@ -1,0 +1,14 @@
+SELECT name_bank, DepositRate, CreditFee
+FROM Bank
+ORDER BY name_bank;
+
+SELECT c.first_NameClient, c.LastNameClient, b.name_bank
+FROM Client c
+JOIN Bank b ON c.bank_id = b.bank_id
+ORDER BY c.LastNameClient;
+
+SELECT a.AccountID, c.first_NameClient, c.LastNameClient, a.account_type, a.balance
+FROM Account a
+JOIN Client c ON a.clientId = c.client_id
+WHERE a.status = 'active'
+ORDER BY a.AccountID;
