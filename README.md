@@ -74,4 +74,5 @@
 Строка подключения:
 ```plaintext
 Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=159753521;
+```
 Также все методы сервисов являются фсинхронными (async / await), для ускорения выполнения обращения к БД.
