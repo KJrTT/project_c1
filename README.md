@@ -1,35 +1,78 @@
-Этап 3
-Основные команды:
-    (BankService)
-    -AddBankAsync (Добавляет новый банк в таблицу bank) / DeleteBankAsync (Удаляет банк из БД, если с ним не связаны клиенты или менеджеры)
-    -GetBankByIdAsync (Получения информации о Банке по ID)
-    -GetAllBanksAsync (Список всех банков)
-    (ClientService)
-    -RegisterClientAsync (Регистрация нового клиента в таблице client)
-    -GetClientByIdAsync (Информация о клиенте по ID)
-    -GetAllClientsAsync (Список всех клиентов)
-    (AccountService)
-    -CreateAccountAsync (Создаёт новыё счёт (дебитовый, кредитный, депозитный))
-    -BlockAccountAsync (Блокирует счёт по ID (Устанавливает статус "frozen"))
-    -UnblockAccountAsync (Разблокирует счёт по ID (Устанавливает статус "active"))
-    -DepositMoneyAsync (Пополняект баланс счёта и создаёт запись о транзакции)
-    -WithdrawMoneyAsync (Снимает средства со счёта (если достаточно баланса) + создаёт запись о транзакции)
-    -GetAccountByIdAsync (Получает информацию о счёте по ID )
-    -GetClientAccountsAsync (Список всех аккаунтов клиента)
-Этап 4
+# Банковская система: Описание слоя работы с БД
 
-Srvices:
-    -BankService : Работает с таблицей bank. Предоставляет методы добавления + удаления + получения информации о банках
-    -ClientService : Работает с таблицей client. Предоставляет методы для регистрации + получения информации о клиентах
-    -AccountService : Работает с таблицами Account (А также с ее отростками debitAccount, depositAccount, creditAccount). Предоставляет методы для создания счетов + блокировка / разблокировка + пополнение / снятие средств
+## Этап 3: Основные команды
 
-Модели:
-    -Bank: Содержит свойства, соответствующие полям таблицы bank (BankId, Name, DepositRate, CreditFee, CreatedAt, UpdatedAt).
-    -Client: Содержит свойства, соответствующие полям таблицы client (ClientId, FirstName, LastName, Age, Address, PassportSeries, PassportNumber,           BankId, CreatedAt, UpdatedAt).
-    -Account: Содержит свойства, соответствующие полям таблицы account (AccountId, ClientId, Balance, InterestRate, AccountType, Status, CreatedAt,          UpdatedAt).
-    
-Подключается локально через Npgsql:
-    private static readonly string connectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=159753521;";
+### **BankService**
+- **AddBankAsync**  
+  Добавляет новый банк в таблицу `bank`.
+- **DeleteBankAsync**  
+  Удаляет банк из БД, если с ним не связаны клиенты или менеджеры.
+- **GetBankByIdAsync**  
+  Получает информацию о банке по его ID.
+- **GetAllBanksAsync**  
+  Возвращает список всех банков.
 
-Также все методы сервисов являются фсинхронными (async / await), для ускорения выполнения обращения к БД.
-    
+### **ClientService**
+- **RegisterClientAsync**  
+  Регистрирует нового клиента в таблице `client`.
+- **GetClientByIdAsync**  
+  Получает информацию о клиенте по его ID.
+- **GetAllClientsAsync**  
+  Возвращает список всех клиентов.
+
+### **AccountService**
+- **CreateAccountAsync**  
+  Создает новый счет (дебетовый, кредитный или депозитный).
+- **BlockAccountAsync**  
+  Блокирует счет по ID (устанавливает статус `frozen`).
+- **UnblockAccountAsync**  
+  Разблокирует счет по ID (устанавливает статус `active`).
+- **DepositMoneyAsync**  
+  Пополняет баланс счета и создает запись о транзакции.
+- **WithdrawMoneyAsync**  
+  Снимает средства со счета (если достаточно баланса) и создает запись о транзакции.
+- **GetAccountByIdAsync**  
+  Получает информацию о счете по его ID.
+- **GetClientAccountsAsync**  
+  Возвращает список всех счетов клиента.
+
+---
+
+## Этап 4: Структура слоя работы с БД
+
+### **Сервисы**
+1. **BankService**  
+   Работает с таблицей `bank`. Предоставляет методы для:
+   - Добавления банков.
+   - Удаления банков.
+   - Получения информации о банках.
+
+2. **ClientService**  
+   Работает с таблицей `client`. Предоставляет методы для:
+   - Регистрации клиентов.
+   - Получения информации о клиентах.
+
+3. **AccountService**  
+   Работает с таблицами:
+   - `account` (основная таблица счетов).
+   - `debitAccount` (дебетовые счета).
+   - `depositAccount` (депозитные счета).
+   - `creditAccount` (кредитные счета).  
+   Предоставляет методы для:
+   - Создания счетов.
+   - Блокировки/разблокировки счетов.
+   - Пополнения/снятия средств.
+
+### **Модели**
+- **Bank**  
+  Свойства: `BankId`, `Name`, `DepositRate`, `CreditFee`, `CreatedAt`, `UpdatedAt`.
+- **Client**  
+  Свойства: `ClientId`, `FirstName`, `LastName`, `Age`, `Address`, `PassportSeries`, `PassportNumber`, `BankId`, `CreatedAt`, `UpdatedAt`.
+- **Account**  
+  Свойства: `AccountId`, `ClientId`, `Balance`, `InterestRate`, `AccountType`, `Status`, `CreatedAt`, `UpdatedAt`.
+
+### **Подключение к БД**
+Используется библиотека **Npgsql** для работы с PostgreSQL.  
+Строка подключения:
+```plaintext
+Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=159753521;
