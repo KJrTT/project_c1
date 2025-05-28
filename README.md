@@ -23,7 +23,45 @@
 
 Демонстрация работы программы
 ![Screenshot_7](https://github.com/user-attachments/assets/47c15551-95aa-4f15-a54e-a28cb3b52cca)
+[ Основной интерфейс программы ]
 
+#### Менеджер
+
+![Screenshot_3](https://github.com/user-attachments/assets/d7ffb985-101e-4987-a898-346afb9109c3)
+[ Интерфейс Менеджера ]
+
+![Screenshot_6](https://github.com/user-attachments/assets/25770d44-d8bc-4553-9c48-08d286e12b31)
+[ Добавление банка ]
+
+![Screenshot_8](https://github.com/user-attachments/assets/d8ec1f13-f11d-4e2a-9291-bd7a2a8da1b8)
+[ Успешное удаление банка ]
+
+![Screenshot_9](https://github.com/user-attachments/assets/06cd8435-f389-4544-8b3f-5eaf4f0266e9)
+[ Неудачное удаление банка ]
+
+![Screenshot_4](https://github.com/user-attachments/assets/1fe4bbc5-cbf9-4921-9162-25101d8807c8)
+[ Просмотр всех клиентов ]
+
+#### Администратор
+
+![Screenshot_10](https://github.com/user-attachments/assets/fa36c8a0-0a49-4626-a41b-ed19b67acd7c)
+[ Интерфейс Администратора ]
+
+![Screenshot_12](https://github.com/user-attachments/assets/afd6fafa-7b92-411c-bacb-c2fb65747fbd)
+[ Пример блокировки (У счёта появляется статус "frozen") ]
+
+Админ может делать все действия, что и менеджер, но ему также доступно блокировка / разблокировка счёта.
+
+#### Клиент
+
+![Screenshot_1](https://github.com/user-attachments/assets/aac5e967-2e14-4b6c-852e-de08d6fcedde)
+[ Пройденная регистрация и интерфейс клиента ]
+
+![Screenshot_2](https://github.com/user-attachments/assets/f5f2f113-a624-400a-83cc-532328e1d8bf)
+[ Пример не пройденной регистрации (Возраст должны быть >= 18)]
+
+![Screenshot_11](https://github.com/user-attachments/assets/00b565c1-916c-4421-9c11-cc6ebb278733)
+[ Просмотр всех счетов (Ищет по связке clientid + accountid )]
 
 # Этап 1. Проектирование системы
 ## Какую проблему решает?
