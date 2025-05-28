@@ -68,7 +68,7 @@
 ### Успешная регистрация
 ![Успешная регистрация](https://github.com/user-attachments/assets/aac5e967-2e14-4b6c-852e-de08d6fcedde)
 
-### Ошибка регистрации (возраст < 18)
+### Ошибка регистрации (возраст <= 18)
 ![Ошибка регистрации](https://github.com/user-attachments/assets/f5f2f113-a624-400a-83cc-532328e1d8bf)
 
 ### Просмотр счетов (по clientid + accountid)
