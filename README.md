@@ -82,66 +82,78 @@
 - **Unique-поля:**  
   `EmailAdmin`, `PassportNumber`, `PassportSeries` и т.д.  
 
-Этап 3. Основные команды
-BankService
+# Этап 3. Основные команды
 
-AddBankAsync: добавляет новый банк в таблицу bank.
-DeleteBankAsync: удаляет банк из базы данных, если с ним не связаны клиенты или менеджеры.
-GetBankByIdAsync: получает информацию о банке по его ID.
-GetAllBanksAsync: возвращает список всех банков.
+## BankService
 
-ClientService
+- `AddBankAsync`: добавляет новый банк в таблицу `bank`.
+- `DeleteBankAsync`: удаляет банк из базы данных, если с ним не связаны клиенты или менеджеры.
+- `GetBankByIdAsync`: получает информацию о банке по его ID.
+- `GetAllBanksAsync`: возвращает список всех банков.
 
-RegisterClientAsync: регистрирует нового клиента в таблице client.
-GetClientByIdAsync: получает информацию о клиенте по его ID.
-GetAllClientsAsync: возвращает список всех клиентов.
+## ClientService
 
-AccountService
+- `RegisterClientAsync`: регистрирует нового клиента в таблице `client`.
+- `GetClientByIdAsync`: получает информацию о клиенте по его ID.
+- `GetAllClientsAsync`: возвращает список всех клиентов.
 
-CreateAccountAsync: создаёт новый счёт (дебетовый, кредитный или депозитный).
-BlockAccountAsync: блокирует счёт по ID (устанавливает статус frozen).
-UnblockAccountAsync: разблокирует счёт по ID (устанавливает статус active).
-DepositMoneyAsync: пополняет баланс счёта и создаёт запись о транзакции.
-WithdrawMoneyAsync: снимает средства со счёта (если достаточно баланса) и создаёт запись о транзакции.
-GetAccountByIdAsync: получает информацию о счёте по его ID.
-GetClientAccountsAsync: возвращает список всех счетов клиента.
+## AccountService
 
-Этап 4. Структура слоя работы с базой данных
-Сервисы
+- `CreateAccountAsync`: создаёт новый счёт (дебетовый, кредитный или депозитный).
+- `BlockAccountAsync`: блокирует счёт по ID (устанавливает статус `frozen`).
+- `UnblockAccountAsync`: разблокирует счёт по ID (устанавливает статус `active`).
+- `DepositMoneyAsync`: пополняет баланс счёта и создаёт запись о транзакции.
+- `WithdrawMoneyAsync`: снимает средства со счёта (если достаточно баланса) и создаёт запись о транзакции.
+- `GetAccountByIdAsync`: получает информацию о счёте по его ID.
+- `GetClientAccountsAsync`: возвращает список всех счетов клиента.
 
-BankService:Работает с таблицей bank. Предоставляет методы для:  
-Добавления банков.  
-Удаления банков.  
-Получения информации о банках.
+# Этап 4. Структура слоя работы с базой данных
 
+## Сервисы
 
-ClientService:Работает с таблицей client. Предоставляет методы для:  
-Регистрации клиентов.  
-Получения информации о клиентах.
+### BankService
+Работает с таблицей `bank`. Предоставляет методы для:
+- Добавления банков.
+- Удаления банков.
+- Получения информации о банках.
 
+### ClientService
+Работает с таблицей `client`. Предоставляет методы для:
+- Регистрации клиентов.
+- Получения информации о клиентах.
 
-AccountService:Работает с таблицами:  
-account (основная таблица счетов).  
-debitAccount (дебетовые счета).  
-depositAccount (депозитные счета).  
-creditAccount (кредитные счета).Предоставляет методы для:  
-Создания счетов.  
-Блокировки/разблокировки счетов.  
-Пополнения/снятия средств.
+### AccountService
+Работает с таблицами:
+- `account` (основная таблица счетов).
+- `debitAccount` (дебетовые счета).
+- `depositAccount` (депозитные счета).
+- `creditAccount` (кредитные счета).
 
+Предоставляет методы для:
+- Создания счетов.
+- Блокировки/разблокировки счетов.
+- Пополнения/снятия средств.
 
+## Модели
 
-Модели
+### Bank
+Свойства: `BankId`, `Name`, `DepositRate`, `CreditFee`, `CreatedAt`, `UpdatedAt`.
 
-Bank:Свойства: BankId, Name, DepositRate, CreditFee, CreatedAt, UpdatedAt.
-Client:Свойства: ClientId, FirstName, LastName, Age, Address, PassportSeries, PassportNumber, BankId, CreatedAt, UpdatedAt.
-Account:Свойства: AccountId, ClientId, Balance, InterestRate, AccountType, Status, CreatedAt, UpdatedAt.
+### Client
+Свойства: `ClientId`, `FirstName`, `LastName`, `Age`, `Address`, `PassportSeries`, `PassportNumber`, `BankId`, `CreatedAt`, `UpdatedAt`.
 
-Подключение к базе данных
-Используется библиотека Npgsql для работы с PostgreSQL.Строка подключения:
-Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=159753521;
+### Account
+Свойства: `AccountId`, `ClientId`, `Balance`, `InterestRate`, `AccountType`, `Status`, `CreatedAt`, `UpdatedAt`.
 
+## Подключение к базе данных
+Используется библиотека `Npgsql` для работы с PostgreSQL.
+
+Строка подключения:
+```
+Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=password;
+```
 Все методы сервисов асинхронные (async/await) для оптимизации обращений к базе данных.
+
 Этап 5. Реализация бизнес-слоя
 Реализован бизнес-слой банковской системы, который обеспечивает основную логику приложения, отделенную от слоя представления и работы с БД.
 
